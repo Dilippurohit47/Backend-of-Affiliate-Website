@@ -1,10 +1,10 @@
+import cors from "cors"
 import express from "express"
 import morgan from "morgan"
-import cors from "cors"
 
-import userRoute from "../Backend/Router/user.route.js"
 import productRoute from "../Backend/Router/product.router.js"
-import { connectDb } from "./utils/connectDb.js";
+import userRoute from "../Backend/Router/user.route.js"
+import { connectDb } from "./utils/connectDb.js"
 
 
 
