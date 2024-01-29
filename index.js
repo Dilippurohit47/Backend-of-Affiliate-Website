@@ -2,8 +2,8 @@ import cors from "cors"
 import express from "express"
 import morgan from "morgan"
 
-import productRoute from "../Backend/Router/product.router.js"
-import userRoute from "../Backend/Router/user.route.js"
+import ProductRoute from "./Router/product.router.js"
+import UserRoute from "./Router/user.route.js"
 import { connectDb } from "./utils/connectDb.js"
 
 
@@ -20,8 +20,8 @@ app.get('/',(req,res)=>{
     
 })
 
-app.use("/api/v1/user", userRoute);
-app.use("/api/v1/product", productRoute);
+app.use("/api/v1/user", UserRoute);
+app.use("/api/v1/product", ProductRoute);
 
 app.use("/uploads",express.static("uploads"))
 
