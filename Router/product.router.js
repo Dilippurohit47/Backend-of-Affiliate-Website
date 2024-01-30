@@ -12,18 +12,19 @@ import {
   updateProduct,
 } from "../controllers/product.controller.js";
 import { singleUpload } from "../middlewares/multer.js";
+import { adminOnly } from "../middlewares/adminOnly.js";
 
 const app = express.Router();
 
-app.post("/create/new", singleUpload, newProduct);
+app.post("/create/new",adminOnly, singleUpload, newProduct);
 app.get("/all", getAllProducts);
 app.get("/latest", getlatestProducts);
 app.get("/category/:category", getCategoryProduct);
-app.delete("/:id", deleteProduct);
+app.delete("/:id",adminOnly,  deleteProduct);
 app.get("/category", allCategories);
-app.get("/:id", singleProduct);
+app.get("/:id",singleProduct);
 app.delete("/delete", deleteAll);
 // app.get("/search/:search", searchProducts);
-app.put("/:id", singleUpload,updateProduct);
+app.put("/:id",adminOnly,  singleUpload,updateProduct);
 
 export default app;
