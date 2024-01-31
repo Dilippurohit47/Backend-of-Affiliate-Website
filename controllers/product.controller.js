@@ -3,17 +3,17 @@ import {rm} from "fs";
 
 export const newProduct = async (req, res) => {
   try {
-    const { name, link, desc, category, price } = req.body;
+    const { name, link, desc, category, price ,aliExpressLink} = req.body;
 
     const photo = req.file;
-    console.log(name, link, desc, category, price);
+    console.log(name, link, desc, category, price ,aliExpressLink );
 
     if (!photo)
       return res.status(405).json({
         message: "Please upload images  of product",
       });
     console.log("Afyter img");
-    if (!name || !link || !desc || !category || !price) {
+    if (!name  || !desc || !category  || !price) {
       return res.status(401).json({
         message: "Please enter all fields",
       });
@@ -25,6 +25,7 @@ export const newProduct = async (req, res) => {
       desc,
       category: category.toLowerCase(),
       price,
+      aliExpressLink,
       photo: photo.path,
     });
 
@@ -224,7 +225,7 @@ export const getCategoryProduct = async (req, res) => {
 export const updateProduct = async(req,res) =>{
 
   const {id} =  req.params;
-  const {name ,price , desc ,link , category} =req.body;
+  const {name ,price , desc ,link , category ,aliExpressLink} =req.body;
 
   const photo = req.file;
 
@@ -260,6 +261,7 @@ export const updateProduct = async(req,res) =>{
   if(desc) product.desc = desc
   if(category) product.category = category
   if(link) product.link = link
+  if(aliExpressLink) product.aliExpressLink = aliExpressLink
 
   await product.save();
 return res.status(200).json({

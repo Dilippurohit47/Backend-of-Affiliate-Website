@@ -27,9 +27,13 @@ desc : {
 },
 link : {
     type:String,
-    required:[true," please enter link of the products "]
+    // required:[true," please enter link of the products "]
 
+},
+aliExpressLink:{
+    type:String
 }
+
 
 },{timestamps:true})
 
