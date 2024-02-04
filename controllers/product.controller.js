@@ -12,7 +12,6 @@ export const newProduct = async (req, res) => {
       return res.status(405).json({
         message: "Please upload images  of product",
       });
-    console.log("Afyter img");
     if (!name  || !desc || !category  || !price) {
       return res.status(401).json({
         message: "Please enter all fields",
