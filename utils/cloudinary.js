@@ -3,10 +3,11 @@ import fs from "fs"
 
 
 cloudinary.config({ 
-  cloud_name: process.env.CLOUDINARY_CLOUD-NAME, 
-  api_key: process.env.CLOUDINARY_API_KEY, 
-  api_secret: process.env.CLOUDINARY_API_SECRET 
+  cloud_name:"dfzmam9tn", 
+  api_key:177953718468919, 
+  api_secret:"L9D_wkOFZpwQha3jXMco8922ocg",
 });
+
 
 
 const uploadOnCloudinary = async(localFilePath) =>{
@@ -14,18 +15,46 @@ const uploadOnCloudinary = async(localFilePath) =>{
     try {
         if(!localFilePath) return null
 
-        const response = await cloudinary.uploader.upload(localFilePath, {
-            resource_type:"auto"
-        })
-        console.log("file is uploaded on cloudinary",response.url)
-
+        const response = await cloudinary.uploader.upload(localFilePath)
+        console.log("file is uploaded on cloudinary")
+        fs.unlinkSync(localFilePath);
         return response;
         
 
     } catch (error) {
+        console.log("error in cloud",error)
         fs.unlinkSync(localFilePath) //remove the temp file from the localfilepath as the uplaod operation got failed
     }
 
 }
 
-export {uploadOnCloudinary}
+
+ const deleteFromCloudinary = async(cloudinaryPath) =>{
+
+    console.log(cloudinaryPath)
+
+    try {
+        const result = await cloudinary.uploader.destroy(cloudinaryPath);
+        console.log("image deleted from cloudinary" , result)
+        return result
+    } catch (error) {
+        console.log("error in deleting image from cloudinary" , error)
+        throw error;
+        
+    }
+
+}
+
+
+export {uploadOnCloudinary, deleteFromCloudinary}
+
+/* const deleteFromCloudinary = async (imagePublicId) => {
+    try {
+        const result = await cloudinary.uploader.destroy(imagePublicId);
+        console.log("Image deleted from Cloudinary:", result);
+        return result;
+    } catch (error) {
+        console.error("Error deleting image from Cloudinary:", error);
+        throw error;
+    }
+}*/

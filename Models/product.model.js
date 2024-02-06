@@ -32,6 +32,9 @@ link : {
 },
 aliExpressLink:{
     type:String
+},
+publicId:{
+    type:String
 }
 
 

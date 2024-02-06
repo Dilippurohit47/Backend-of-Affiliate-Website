@@ -5,10 +5,15 @@ import morgan from "morgan"
 import ProductRoute from "./Router/product.router.js"
 import UserRoute from "./Router/user.route.js"
 import { connectDb } from "./utils/connectDb.js"
-
+import cloudinary from "cloudinary";
 
 
 connectDb();
+// cloudinary.v2.config({
+//     cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
+//     api_key:process.env.CLOUDINARY_API_KEY,
+//     api_secret:CLOUDINARY_API_SECRET
+// })
 const app = express();
 app.use(morgan("dev"))
 app.use(cors())

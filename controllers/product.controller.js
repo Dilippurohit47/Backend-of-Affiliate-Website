@@ -1,5 +1,7 @@
 import { Product } from "../Models/product.model.js";
 import {rm} from "fs";
+import {uploadOnCloudinary} from "../utils/cloudinary.js"
+import {deleteFromCloudinary} from "../utils/cloudinary.js"
 
 export const newProduct = async (req, res) => {
   try {
@@ -18,16 +20,20 @@ export const newProduct = async (req, res) => {
       });
     }
 
-    await Product.create({
+    const cloudinaryResponse = await uploadOnCloudinary(photo?.path);
+// console.log(cloudinaryResponse)
+await Product.create({
       name,
       link,
       desc,
       category: category.toLowerCase(),
       price,
       aliExpressLink,
-      photo: photo.path,
+      photo: cloudinaryResponse?.secure_url,
+      publicId:cloudinaryResponse?.public_id,
     });
 
+ 
     return res.status(201).json({
       success: true,
       message: `Product ${name} created  successfully`,
@@ -99,13 +105,9 @@ export const deleteProduct = async (req, res) => {
       return res.status(400).json({
         message: "Invalid product id  or product deleted already ",
       });
-      // console.log(product.photo)
-      // console.log(product)
-
-
-      rm(product.photo, () => {
-        console.log("photo deleted");
-      });
+ 
+      await deleteFromCloudinary(product?.publicId);
+     
 
     await product.deleteOne();
     return res.status(200).json({
@@ -232,7 +234,7 @@ export const updateProduct = async(req,res) =>{
   try {
 
   const product = await Product.findById(id);
-  console.log(product)
+  // console.log(product)
 
 
   if(!product) {
@@ -240,18 +242,14 @@ export const updateProduct = async(req,res) =>{
       message:`Invalid product id`,
     })
   } 
-
-
-
   if(photo){
+ 
 
+    await deleteFromCloudinary(product?.publicId)
+  
 
-    rm(product.photo, () => {
-      console.log("Old photo deleted");
-    });
-
-
-    product.photo = photo.path
+    const cloudinaryResponse = await uploadOnCloudinary(photo?.path);
+    product.photo = cloudinaryResponse?.secure_url
 
     }
 
