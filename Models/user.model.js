@@ -24,6 +24,9 @@ const Userschema = new mongoose.Schema({
         type:String,
         enum:['admin' , "user"],
         default:"user"
+    },
+    cartItems: {
+      type:Array    
     }
 
 },{timestamps:true}) 

@@ -21,7 +21,7 @@ export const newProduct = async (req, res) => {
     }
 
     const cloudinaryResponse = await uploadOnCloudinary(photo?.path);
-// console.log(cloudinaryResponse)
+
 await Product.create({
       name,
       link,

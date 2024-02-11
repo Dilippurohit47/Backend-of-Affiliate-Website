@@ -9,11 +9,7 @@ import cloudinary from "cloudinary";
 
 
 connectDb();
-// cloudinary.v2.config({
-//     cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
-//     api_key:process.env.CLOUDINARY_API_KEY,
-//     api_secret:CLOUDINARY_API_SECRET
-// })
+
 const app = express();
 app.use(morgan("dev"))
 app.use(cors())

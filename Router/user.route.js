@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  Addcart,
   deleteUser,
   getAllUsers,
   getUser,
@@ -16,5 +17,6 @@ app.post("/new", newUser);
 app.get("/all", getAllUsers);
 app.get("/:id", getUser);
 app.delete("/:id", deleteUser);
+app.post("/cart/:userId/:productId",Addcart)
 
 export default app;
