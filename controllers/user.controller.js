@@ -10,6 +10,7 @@ export const newUser = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: `Welcome again ,${user.name}`,
+      user,
     });
 
   if (!_id || !name || !email)
@@ -27,6 +28,7 @@ export const newUser = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: ` welcome ${name} `,
+      user,
     });
   } catch (error) {
     if (error.code === 11000 && error.keyPattern && error.keyPattern.email) {
@@ -134,13 +136,7 @@ export const Addcart = async (req, res) => {
           });
          
     }
-
-
-
     const product = await Product.findById(productId);
-
-
-
     if (!product) {
       return res.status(404).json({
         success: false,
