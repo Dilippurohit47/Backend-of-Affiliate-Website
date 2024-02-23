@@ -120,26 +120,11 @@ export const Addcart = async (req, res) => {
 
 
 
-    // const isProductInCart = user?.cartItems.some(
-    //   (item) => item?.product?._id.toString() === productId
-
-    // );
-
-    // // If the product is already in the cart, return an error response
-    // if (isProductInCart) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     message: "Product is  already in cart",
-    //   });
-    // }
-
-
     const existingIndex = user?.cartItems.findIndex(
       (item) => item?._id.toString() === productId
     );
 
-console.log("index",existingIndex)
-console.log("product",user?.cartItems[existingIndex])
+
     if (existingIndex !== -1) {
       user?.cartItems?.splice(existingIndex, 1);
       await user.save();
@@ -154,7 +139,7 @@ console.log("product",user?.cartItems[existingIndex])
 
     const product = await Product.findById(productId);
 
-    console.log("product", product);
+
 
     if (!product) {
       return res.status(404).json({
@@ -173,7 +158,7 @@ console.log("product",user?.cartItems[existingIndex])
       product,
     });
   } catch (error) {
-    // console.error("Error adding product to cart:", error);
+
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });

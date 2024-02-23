@@ -8,7 +8,7 @@ export const newProduct = async (req, res) => {
     const { name, link, desc, category, price ,aliExpressLink} = req.body;
 
     const photo = req.file;
-    console.log(name, link, desc, category, price ,aliExpressLink );
+
 
     if (!photo)
       return res.status(405).json({
@@ -158,7 +158,7 @@ export const singleProduct = async (req, res) => {
   const id = req.params.id;
   try {
     let product = await Product.findById(id);
-    // console.log(product)
+
 
     if (!product)
       return res.status(401).json({
@@ -234,7 +234,7 @@ export const updateProduct = async(req,res) =>{
   try {
 
   const product = await Product.findById(id);
-  // console.log(product)
+
 
 
   if(!product) {

@@ -7,7 +7,7 @@ import {
   getCategoryProduct,
   getlatestProducts,
   newProduct,
-  // searchProducts,
+
   singleProduct,
   updateProduct,
 } from "../controllers/product.controller.js";
@@ -24,7 +24,7 @@ app.delete("/:id",adminOnly,  deleteProduct);
 app.get("/category", allCategories);
 app.get("/:id",singleProduct);
 app.delete("/delete", deleteAll);
-// app.get("/search/:search", searchProducts);
+
 app.put("/:id",adminOnly,  singleUpload,updateProduct);
 
 export default app;
